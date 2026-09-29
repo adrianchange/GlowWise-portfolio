@@ -21,9 +21,7 @@ Este repositorio es la **ficha pública de portfolio** (case study + referencia 
 7. [IA: chat, visión y respuestas estructuradas](#7-ia-chat-visión-y-respuestas-estructuradas)
 8. [Backend (API Node)](#8-backend-api-node)
 9. [Decisiones de diseño](#9-decisiones-de-diseño)
-10. [Guía rápida para entrevistas](#10-guía-rápida-para-entrevistas)
-11. [Preguntas frecuentes (respuestas cortas)](#11-preguntas-frecuentes-respuestas-cortas)
-12. [Elevator pitch (30 s)](#12-elevator-pitch-30-s)
+10. [En una frase](#10-en-una-frase)
 
 ---
 
@@ -286,75 +284,9 @@ Claves típicas en `localStorage`: `aibeauty.profile`, `aibeauty.chat`, `aibeaut
 
 ---
 
-## 10. Guía rápida para entrevistas
+## 10. En una frase
 
-### Qué problemas resuelve
-
-- Consejo de belleza **personalizado** sin app de marca única.
-- **Rutinas accionables** (no solo texto): guardar, pin AM/PM, checklist y rachas.
-- **Inventario de productos** y alertas de conflicto entre ingredientes.
-- **Privacidad por defecto:** datos de hábito en el dispositivo; IA solo cuando el usuario chatea.
-
-### Qué destacar según el puesto
-
-| Puesto | Ángulo |
-|--------|--------|
-| **Frontend** | Vue 3 modular, Pinia persistido, streaming UX, PWA, i18n, Tailwind, composables (`useBeautyChat`, backup) |
-| **Full-stack** | API Node sin framework pesado, Zod, multi-proveedor IA, Stripe + webhooks, despliegue Vercel/Railway |
-| **IA / applied** | Prompting con perfil, visión multimodal, JSON estructurado, cupos anti-abuso, modo demo |
-| **Producto** | Onboarding, free tier + Plus, local-first + export, legal/health disclaimers |
-
-### Métricas / complejidad (cualitativas)
-
-- **~10 rutas** funcionales, **7 stores**, módulos por dominio (`modules/chat`, `routines`, `shelf`…).
-- **3 idiomas de integración IA** (Groq/Gemini/OpenAI) detrás de una interfaz común.
-- **Flujos móvil:** LAN dev, buffer chat, borrador foto en `sessionStorage` al abrir cámara.
-
-### Riesgos que ya contemplaste (di en voz alta)
-
-- Datos en LLM = política de privacidad clara; no guardar chat en servidor propio.
-- Cupos en archivo local Railway → puede resetear sin volumen persistente.
-- No es diagnóstico médico → copy legal + prompt.
-
----
-
-## 11. Preguntas frecuentes (respuestas cortas)
-
-**¿Por qué Vue y no React?**  
-Producto construido en ecosistema Vue 3 + Pinia; Composition API, tipado fuerte y Vite 8.
-
-**¿Dónde está la base de datos?**  
-No hay BD de usuarios: **localStorage** + **IndexedDB** (imágenes). Cupos/waitlist en ficheros servidor (`.data/`).
-
-**¿Cómo evitas que quemen tu API key en la demo pública?**  
-Clave solo en Railway; cupos por `deviceId`; modo demo; opción Plus.
-
-**¿Cómo personalizas sin login?**  
-Perfil en localStorage se adjunta a cada `POST /api/chat`.
-
-**¿Cómo conviertes respuesta IA en rutina?**  
-Regex/parse de bloque JSON → validación Zod → store `routines`.
-
-**¿Streaming?**  
-`text/event-stream` en PC; móvil pide respuesta buffered.
-
-**¿Stripe sin usuarios cloud?**  
-Plus ligado a **`X-GlowWise-Device`** + webhook actualiza estado en servidor.
-
-**¿Open source?**  
-Código en repo **privado**; esta ficha + demo públicas para reclutadores.
-
-**¿Relación con TonoLab?**  
-Proyecto separado (misma línea de producto belleza; GlowWise es marca propia).
-
-**¿Qué mejorarías en v2?**  
-Sync opcional con cuenta, tests e2e del chat, persistencia de cupos en Redis/Supabase, observabilidad.
-
----
-
-## 12. Elevator pitch (30 s)
-
-> GlowWise es una PWA de coaching de belleza con IA. El usuario define su perfil, chatea con un coach que entiende texto y fotos, y convierte consejos en rutinas con checklist y rachas. Los productos van a una estantería con escaneo y alertas de ingredientes. Casi todo vive en el navegador; solo el chat pasa por una API Node que protege las claves, aplica cupos y opcionalmente Stripe. Está desplegada en Vercel con backend en Railway — puedes probarla ahora mismo en el enlace de arriba.
+> PWA de coaching de belleza con IA multimodal: perfil y hábitos **local-first**, chat con visión, rutinas guardables desde respuestas estructuradas, estantería con escaneo, cupos y Stripe — demo en Vercel, API en Railway.
 
 ---
 
